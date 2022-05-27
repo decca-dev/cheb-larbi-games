@@ -1,22 +1,27 @@
-export const useUser = () => {
-  let final: {
-    exists: boolean;
-    data: {
-      id?: string;
-      name?: string;
-      avatar?: number;
-      isBanned?: boolean;
-      isAdmin?: boolean;
-    };
-  } = {
-    exists: false,
-    data: {},
-  };
-  const user = localStorage.getItem("user")!;
-  if (!user) {
-    return final;
-  } else {
-    final.data = JSON.parse(user);
-    return final;
-  }
+import { useEffect } from "react";
+import Router from "next/router";
+import type { UserInterface } from "../types";
+import useSWR from "swr";
+
+export const useUser = ({
+  redirectTo,
+  redirectIfFound = false,
+}: {
+  redirectTo?: string;
+  redirectIfFound?: boolean;
+}) => {
+  const { data: user, mutate: mutateUser } = useSWR<
+    UserInterface & { isLoggedIn: boolean }
+  >("/api/auth/me");
+  useEffect(() => {
+    if (!redirectTo || !user) return;
+    if (
+      (redirectTo && !redirectIfFound && !user?.isLoggedIn) ||
+      (redirectIfFound && user?.isLoggedIn)
+    ) {
+      Router.push(redirectTo);
+    }
+  }, [user, redirectIfFound, redirectTo]);
+
+  return { user, mutateUser };
 };

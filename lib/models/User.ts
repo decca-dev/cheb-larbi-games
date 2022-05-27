@@ -15,7 +15,6 @@ const UserSchema = new Schema<UserInterface>({
   email: { type: String, unique: true },
   password: { type: String },
   isBanned: { type: Boolean, default: false },
-  bannedAt: { type: Date },
   isAdmin: { type: Boolean, default: false },
 });
 
