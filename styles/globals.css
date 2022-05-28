@@ -91,6 +91,27 @@ body {
   opacity: 1;
 }
 
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: linear-gradient(
+    rgba(84, 75, 242, 1) 0%,
+    rgba(33, 33, 121, 1) 50%,
+    rgba(10, 10, 119, 1) 100%
+  );
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    rgba(84, 70, 242, 1) 0%,
+    rgba(33, 90, 121, 1) 50%,
+    rgba(10, 100, 119, 1) 100%
+  );
+  border-radius: 20px;
+}
+
 @media (min-width: 768px) {
   .container {
     width: 750px;
