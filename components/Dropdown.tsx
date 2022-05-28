@@ -1,5 +1,6 @@
-import { useState, ReactNode, useEffect } from "react";
+import { useState, ReactNode, useRef } from "react";
 import Link from "next/link";
+import { useOutsideAlerter } from "../lib/hooks/useOutsideAlerter";
 
 interface DropdownItem {
   text: string;
@@ -13,8 +14,10 @@ interface Dropdown {
 }
 
 const Dropdown = ({ direction, child, items }: Dropdown) => {
+  const dropdownRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
   const toggleVisibility = () => setIsVisible(!isVisible);
+  useOutsideAlerter(dropdownRef, () => setIsVisible(false));
 
   return (
     <div
@@ -27,10 +30,11 @@ const Dropdown = ({ direction, child, items }: Dropdown) => {
           ? "relative inline-block"
           : ""
       }`}
+      ref={dropdownRef}
     >
       <button onClick={toggleVisibility}>{child}</button>
       {isVisible && (
-        <div className="absolute flex flex-col rounded-md drop-shadow-lg child-xl">
+        <div className="absolute flex flex-col rounded-md drop-shadow-lg child-xl cursor-pointer">
           {items.map((item, i) => {
             return <DropdownItem href={item.href} text={item.text} key={i} />;
           })}
@@ -43,7 +47,10 @@ const Dropdown = ({ direction, child, items }: Dropdown) => {
 const DropdownItem = ({ text, href }: DropdownItem) => {
   return (
     <>
-      <p className="py-2 w-24 sm:w-32 pl-3 border-gray-200 border-b-2 bg-white text-black">
+      <p
+        className="py-2 w-24 sm:w-32 pl-3 border-gray-200 border-b-2 bg-white text-black"
+        onClick={() => (window.location.href = href)}
+      >
         <Link href={href}>{text}</Link>
       </p>
     </>

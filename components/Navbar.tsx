@@ -18,7 +18,10 @@ const Navbar: FC = () => {
         <div className="space-x-3 flex flex-row">
           {user?.isLoggedIn && (
             <Dropdown
-              items={[{ text: "Logout", href: "/api/auth/logout" }]}
+              items={[
+                { text: "Logout", href: "/api/auth/logout" },
+                { text: "Leaderboard", href: "/leaderboard" },
+              ]}
               direction="bottom"
               child={
                 <div className="-mt-1 cursor-pointer">
@@ -39,7 +42,10 @@ const Navbar: FC = () => {
           )}
           {!user?.isLoggedIn && (
             <Dropdown
-              items={[{ text: "Login", href: "/auth/login" }]}
+              items={[
+                { text: "Login", href: "/auth/login" },
+                { text: "Leaderboard", href: "/leaderboard" },
+              ]}
               direction="bottom"
               child={<h1 className="font-bold">Extra</h1>}
             />

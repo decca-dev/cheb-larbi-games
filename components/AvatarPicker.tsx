@@ -32,6 +32,7 @@ const Avatar = ({ number, setAvatar }: AVProps) => {
       height={150}
       onClick={() => setAvatar(number)}
       className="cursor-pointer"
+      alt={`number ${number}`}
     />
   );
 };

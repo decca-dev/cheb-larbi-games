@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import Image from "next/image";
 
 interface ToastOptions {
   title: string;
@@ -19,17 +20,18 @@ const Toast = ({ title, description, type }: ToastOptions) => {
   return (
     <div id="toast" className={"toast show toast-" + type}>
       <h6 className="inline-block align-middle">
-        <img
-          src={
-            type === "success"
-              ? "https://cdn.discordapp.com/emojis/763060759835705345.png"
-              : "https://cdn.discordapp.com/emojis/763060555052220417.png"
-          }
-          alt=""
-          width="25"
-          height="25"
-          className="inline-block align-middle mr-2"
-        />
+        <div className="inline-block align-middle mr-2">
+          <Image
+            src={
+              type === "success"
+                ? "https://cdn.discordapp.com/emojis/763060759835705345.png"
+                : "https://cdn.discordapp.com/emojis/763060555052220417.png"
+            }
+            alt="icon"
+            width="25"
+            height="25"
+          />
+        </div>
         {title}
       </h6>
       <p>{description}</p>
