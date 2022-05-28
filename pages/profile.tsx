@@ -1,4 +1,3 @@
-import React from "react";
 import Layout from "../components/Layout";
 import { UserInterface } from "../lib/types";
 import { useMetaData } from "../lib/hooks/useMetaData";
@@ -23,19 +22,38 @@ const profile: NextPage<{ user: UserInterface }> = ({ user }) => {
             />
           </div>
           <div>
-            <div className="tooltip mt-8">
-              <span className="tooltip-text">Edit</span>
+            <div className="mt-8">
               <p className="hover:bg-green-500 cursor-pointer pt-1 h-10 w-96 rounded-md border-2 pl-2">
-                {user?.name}
+                Name: {user?.name}
               </p>
             </div>
           </div>
           <div>
-            <div className="tooltip mt-8">
-              <span className="tooltip-text">Edit</span>
+            <div className="mt-8">
               <p className="hover:bg-green-500 cursor-pointer pt-1 h-10 w-96 rounded-md border-2 pl-2">
-                {user?.bio}
+                ID: {user?.ID}
               </p>
+            </div>
+          </div>
+          <div>
+            <div className="mt-8">
+              <p className="hover:bg-green-500 cursor-pointer pt-1 h-10 w-96 rounded-md border-2 pl-2">
+                Bio: {user?.bio}
+              </p>
+            </div>
+          </div>
+          <div>
+            <div className="mt-8">
+              <div className="hover:bg-green-500 cursor-pointer pt-1 h-10 w-96 rounded-md border-2 pl-2 flex flex-row items-center justify-center">
+                <h1>Avatar: </h1>
+                <Image
+                  src={`/avatars/${user?.avatar}.svg`}
+                  width="25"
+                  height="25"
+                  className="rounded-full inline-block align-middle"
+                  alt="avatar"
+                />
+              </div>
             </div>
           </div>
         </div>
