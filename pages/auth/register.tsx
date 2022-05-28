@@ -6,6 +6,7 @@ import Layout from "../../components/Layout";
 import { useMetaData } from "../../lib/hooks/useMetaData";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Toast from "../../components/Toast";
+import Link from "next/link";
 
 type FieldValues =
   | {
@@ -71,7 +72,6 @@ const register: NextPage = () => {
       <Layout>
         <div className="flex flex-col items-center mb-10">
           <div className="flex flex-col justify-center items-center p-10 rounded-3xl shadow-2xl bg-white w-full">
-            <br />
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="flex flex-col text-center sm:grid grid-cols-3 gap-4 place-items-center">
                 <div className="pb-3">
@@ -146,6 +146,7 @@ const register: NextPage = () => {
                   width={200}
                   height={200}
                   className="mb-24"
+                  alt="chosen avatar"
                 />
                 <div className="pt-10"></div>
                 <AvatarPicker avatar={avatar} setAvatar={setAvatar} />
@@ -158,6 +159,12 @@ const register: NextPage = () => {
                 </button>
               </div>
             </form>
+            <p className="font-semibold pt-5">
+              Already have an account?{" "}
+              <span className="text-blue-500 underline">
+                <Link href={"/auth/login"}>Login</Link>
+              </span>
+            </p>
           </div>
         </div>
         {message?.type && message?.text && (

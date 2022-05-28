@@ -1,8 +1,13 @@
+import type { NextPage } from "next";
 import { useState } from "react";
 import { useMetaData } from "../../lib/hooks/useMetaData";
 import Layout from "../../components/Layout";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Toast from "../../components/Toast";
+import Link from "next/link";
+import Image from "next/image";
+import { withIronSessionSsr } from "iron-session/next";
+import { ironOptions } from "../../lib/helpers/ironConfig";
 
 type FieldValues =
   | {
@@ -11,7 +16,40 @@ type FieldValues =
     }
   | { [x: string]: any };
 
-const login = () => {
+const login: NextPage<{ loggedIn: boolean }> = ({ loggedIn }) => {
+  if (loggedIn) {
+    return (
+      <>
+        {useMetaData(
+          "Login",
+          "Login to your cheb larbi games account.",
+          "/auth/login"
+        )}
+        <Layout>
+          <div className="flex flex-col items-center bg-gray-200 rounded-xl shadow-xl pb-8">
+            <div>
+              <Image
+                src="/assets/logo.svg"
+                alt="sadge"
+                width="250"
+                height="250"
+              />
+            </div>
+            <h2 className="pt-3 pb-5 font-bold text-xl">
+              You are already logged in.
+            </h2>
+            <button
+              className="text-white border-0 py-2 px-5 focus:outline-none rounded text-base mt-4 bg-green-600 md:mt-0"
+              onClick={() => (window.location.href = "/")}
+            >
+              Take me home
+            </button>
+          </div>
+        </Layout>
+      </>
+    );
+  }
+
   const {
     register,
     handleSubmit,
@@ -108,6 +146,12 @@ const login = () => {
               </button>
             </div>
           </form>
+          <p className="font-semibold pt-5">
+            Don't have an account?{" "}
+            <span className="text-blue-500 underline">
+              <Link href={"/auth/register"}>Register</Link>
+            </span>
+          </p>
         </div>
         {message?.type && message.text && (
           <Toast
@@ -120,5 +164,26 @@ const login = () => {
     </>
   );
 };
+
+export const getServerSideProps = withIronSessionSsr(
+  //@ts-ignore
+  async function getServerSideProps(ctx: NextPageContext) {
+    const user = ctx.req?.session.user;
+    if (user?.isLoggedIn) {
+      return {
+        props: {
+          loggedIn: true,
+        },
+      };
+    } else {
+      return {
+        props: {
+          loggedIn: false,
+        },
+      };
+    }
+  },
+  ironOptions
+);
 
 export default login;
