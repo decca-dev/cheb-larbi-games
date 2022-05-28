@@ -19,6 +19,7 @@ const Navbar: FC = () => {
           {user?.isLoggedIn && (
             <Dropdown
               items={[
+                { text: "Profile", href: "/profile" },
                 { text: "Logout", href: "/api/auth/logout" },
                 { text: "Leaderboard", href: "/leaderboard" },
               ]}
