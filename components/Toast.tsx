@@ -23,9 +23,7 @@ const Toast = ({ title, description, type }: ToastOptions) => {
         <div className="inline-block align-middle mr-2">
           <Image
             src={
-              type === "success"
-                ? "https://cdn.discordapp.com/emojis/763060759835705345.png"
-                : "https://cdn.discordapp.com/emojis/763060555052220417.png"
+              type === "success" ? "/assets/success.png" : "/assets/error.png"
             }
             alt="icon"
             width="25"
