@@ -17,9 +17,13 @@ const Modal: FC<{
       style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
     >
       <div
-        className="container w-auto h-auto bg-gray-200 rounded-xl shadow-xl pt-8 pb-8 text-black"
+        className="container min-w-min h-auto bg-gray-200 rounded-xl shadow-xl pt-8 pb-8 text-black"
         ref={modalRef}
       >
+        <button onClick={() => setShow(false)} className="float-right -mt-5">
+          &#10006;
+        </button>
+        <br />
         {children}
       </div>
     </div>
