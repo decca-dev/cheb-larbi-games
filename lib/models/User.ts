@@ -10,7 +10,12 @@ const UserSchema = new Schema<UserInterface>({
     )}`,
   },
   name: { type: String, unique: true },
-  bio: { type: String, unique: true, maxlength: 30 },
+  bio: {
+    type: String,
+    unique: true,
+    maxlength: 30,
+    default: "We stan Cheb Larbi",
+  },
   avatar: { type: String },
   email: { type: String, unique: true },
   password: { type: String },

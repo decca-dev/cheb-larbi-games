@@ -31,7 +31,6 @@ export default async function handler(
     const user = new User({
       name: name,
       avatar: avatar,
-      bio: "I love Cheb Larbi!",
       email: email,
     });
     genSalt(10, (ERROR, salt) => {
