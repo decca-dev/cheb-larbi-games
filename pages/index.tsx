@@ -52,19 +52,15 @@ const Home: NextPage<{ data: Array<{ date: string; message: string }> }> = ({
             className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10"
           >
             <PageDisplay
-              image="/avatars/1.svg"
-              name="Flappy Larbi"
-              href="/games/flappylarbi"
+              image="/assets/leaderboard.svg"
+              name="Leaderboard"
+              href="/leaderboard"
             />
+            <PageDisplay image="/assets/Games.svg" name="Games" href="/games" />
             <PageDisplay
-              image="/avatars/1.svg"
-              name="Flappy Larbi"
-              href="/games/flappylarbi"
-            />
-            <PageDisplay
-              image="/avatars/1.svg"
-              name="Flappy Larbi"
-              href="/games/flappylarbi"
+              image="/avatars/2.svg"
+              name="Discover users"
+              href="/users"
             />
           </div>
         </div>
