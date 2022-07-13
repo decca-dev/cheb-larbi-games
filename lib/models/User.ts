@@ -1,5 +1,5 @@
 import { Schema, model, Model } from "mongoose";
-import { UserInterface } from "../types";
+import { UserInterface, GamePlayedInterface } from "../types";
 
 const UserSchema = new Schema<UserInterface>({
   ID: {
@@ -21,6 +21,11 @@ const UserSchema = new Schema<UserInterface>({
   password: { type: String },
   isBanned: { type: Boolean, default: false },
   isAdmin: { type: Boolean, default: false },
+  level: { type: Number, default: 1 },
+  xp: { type: Number, default: 0 },
+  coins: { type: Number, default: 0 },
+  gems: { type: Number, default: 0 },
+  gamesPlayed: { type: Array<GamePlayedInterface>, default: [] }
 });
 
 let User: Model<UserInterface, {}, {}, {}>;

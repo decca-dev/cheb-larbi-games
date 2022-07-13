@@ -39,6 +39,9 @@ export default withIronSessionApiRoute(async function handler(
           isBanned: user.isBanned,
           isAdmin: user.isAdmin,
           isLoggedIn: true,
+          level: user.level,
+          xp: user.xp,
+          gamesPlayed: user.gamesPlayed,
         };
         await req.session.save();
         res.status(200).json({

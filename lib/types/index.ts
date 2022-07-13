@@ -8,4 +8,18 @@ export interface UserInterface {
   isBanned?: boolean;
   isAdmin?: boolean;
   isLoggedIn?: boolean;
+  level: number;
+  xp: number;
+  coins: number;
+  gems: number;
+  gamesPlayed?: GamePlayedInterface[];
+}
+
+export interface GamePlayedInterface {
+  name: string;
+  highestScore: string;
+  totalScore: string;
+  timePlayed: string;
+  inventory: string[];
+  equiped?: string;
 }
