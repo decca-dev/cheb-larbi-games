@@ -17,6 +17,8 @@ const profile: NextPage<{ user: UserInterface }> = ({ user }) => {
   const nameRef = useRef<HTMLParagraphElement | any>();
   const bioRef = useRef<HTMLParagraphElement | any>();
 
+  const xpToNext = 5 * Math.pow(user.level, 2) + 5 * user.level + 100;
+
   const resetToast = () =>
     setTimeout(() => {
       setToast({ type: "", description: "" });
@@ -37,7 +39,8 @@ const profile: NextPage<{ user: UserInterface }> = ({ user }) => {
           description: data.message,
         });
         resetToast();
-        if (data.error === false) nameRef.current.innerText = profile?.name;
+        if (data.error === false)
+          nameRef.current.innerText = "Name: " + profile?.name;
       })
       .catch((err) => {
         console.error(err);
@@ -63,7 +66,8 @@ const profile: NextPage<{ user: UserInterface }> = ({ user }) => {
           description: data.message,
         });
         resetToast();
-        if (data.error === false) bioRef.current.innerText = profile?.bio;
+        if (data.error === false)
+          bioRef.current.innerText = "Bio: " + profile?.bio;
       })
       .catch((err) => {
         console.error(err);
@@ -135,6 +139,20 @@ const profile: NextPage<{ user: UserInterface }> = ({ user }) => {
             </div>
           </div>
           <div>
+            <div className="mt-8">
+              <p className="hover:bg-green-500 cursor-pointer pt-1 h-10 w-96 rounded-md border-2 pl-2">
+                Level: {user?.level}
+              </p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <div className="mt-8">
+                <p className="hover:bg-green-500 cursor-pointer pt-1 h-10 w-96 rounded-md border-2 pl-2">
+                  XP: {user?.xp} | {xpToNext - 0} until level {user.level + 1}
+                </p>
+              </div>
+            </div>
             <div className="mt-8">
               <p
                 onClick={() => setShow2(true)}

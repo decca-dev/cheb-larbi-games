@@ -42,7 +42,7 @@ const USER: NextPage<{ user: UserInterface | null }> = ({ user }) => {
   }
   return (
     <>
-      {useMetaData(user.name, user.bio as string, `/u/${router.query.id}`)}
+      {useMetaData(user.name, user.bio!, `/u/${router.query.id}`)}
       <Layout>
         <div className="flex flex-col items-center text-center text-white">
           <div className="rounded-full border-2 border-l-8 border-r-2 border-cyan-600">

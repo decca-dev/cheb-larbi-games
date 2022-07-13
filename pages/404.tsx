@@ -22,7 +22,7 @@ const fourOfour: NextPage = () => {
             There are no resources on this page
           </h2>
           <button
-            className="text-white border-0 py-2 px-5 focus:outline-none rounded text-base mt-4 bg-green-600 md:mt-0"
+            className="text-white border-0 py-2 px-5 focus:outline-none rounded text-base mt-4 bg-cyan-600 md:mt-0"
             onClick={() => (window.location.href = "/")}
           >
             Go home

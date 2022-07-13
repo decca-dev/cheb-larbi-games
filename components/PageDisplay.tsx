@@ -13,7 +13,9 @@ const PageDisplay: FC<{ image: string; href: string; name: string }> = ({
         className="w-48 h-36 shadow-2xl rounded-lg transition hover:scale-90 ease-in-out duration-200"
         onClick={() => (window.location.href = href)}
       >
-        <Image src={image} width={192} height={144} alt={name} />
+        <div className="rounded-full">
+          <Image src={image} width={192} height={144} alt={name} />
+        </div>
       </div>
     </div>
   );

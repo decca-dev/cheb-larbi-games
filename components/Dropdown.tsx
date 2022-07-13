@@ -48,7 +48,7 @@ const DropdownItem = ({ text, href }: DropdownItem) => {
   return (
     <>
       <p
-        className="py-2 w-24 sm:w-32 pl-3 border-gray-200 border-b-2 bg-white text-black"
+        className="py-2 w-28 sm:w-32 pl-2 border-gray-200 border-b-2 bg-white text-black"
         onClick={() => (window.location.href = href)}
       >
         <Link href={href}>{text}</Link>
