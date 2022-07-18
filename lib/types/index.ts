@@ -17,9 +17,9 @@ export interface UserInterface {
 
 export interface GamePlayedInterface {
   name: string;
-  highestScore: string;
-  totalScore: string;
-  timePlayed: string;
+  highestScore: number;
+  totalScore: number;
+  timePlayed: number;
   inventory: string[];
   equiped?: string;
 }
