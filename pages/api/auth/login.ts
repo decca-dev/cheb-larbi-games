@@ -31,6 +31,7 @@ export default withIronSessionApiRoute(async function handler(
           .json({ error: true, message: "Password does not match." });
         return;
       } else {
+        //@ts-ignore
         req.session.user = {
           ID: user.ID,
           name: user.name,
