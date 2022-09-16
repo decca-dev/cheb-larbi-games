@@ -12,14 +12,15 @@ export interface UserInterface {
   xp: number;
   coins: number;
   gems: number;
-  gamesPlayed?: GamePlayedInterface[];
+  gamesPlayed?: Games;
+}
+export interface Games {
+  [name: string]: Game;
 }
 
-export interface GamePlayedInterface {
-  name: string;
-  highestScore: number;
-  totalScore: number;
-  timePlayed: number;
-  inventory: string[];
-  equiped?: string;
+export interface Game {
+  [name: string]: ObjType;
 }
+
+export type PropType<TObj, TProp extends keyof TObj> = TObj[TProp];
+export type ObjType = PropType<Game, "name">;

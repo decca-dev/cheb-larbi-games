@@ -5,20 +5,6 @@ export const BIRD_WIDTH = 25;
 export const BIRD_HEIGHT = 25;
 export const GAP = 100;
 export const GRAVITY = 1.2;
-// export const TOP_PIPE = new Image();
-// export const BOTTOM_PIPE = new Image();
-// export const THUMBNAIL = new Image();
-// TOP_PIPE.src = "../../../public/assets/game-assets/fl-top-pipe.svg";
-// BOTTOM_PIPE.src = "../../../public/assets/game-assets/fl-bottom-pipe.svg";
-// THUMBNAIL.src = "../../../public/assets/game-icons/flappy-larbi.svg";
-
-export enum BirdType {
-  NORMAL = "bird-normal",
-  SILVER = "bird-silver",
-  GOLD = "bird-diamond",
-  DIAMOND = "bird-diamond",
-  RUBY = "bird-ruby",
-}
 
 export interface ShopItem {
   name: string;
@@ -113,9 +99,16 @@ export class FlappyLarbi extends BasicGame {
             this.ctx.canvas.width,
             this.ctx.canvas.height
           );
-          this.ctx.fillStyle = "black";
-          this.ctx.font = "20px Verdana";
           this.ctx.textAlign = "center";
+          this.ctx.font = "20px Sans-serif";
+          this.ctx.strokeStyle = "black";
+          this.ctx.lineWidth = 8;
+          this.ctx.strokeText(
+            `Click anywhere to start`,
+            this.ctx.canvas.width / 2,
+            this.ctx.canvas.height / 2
+          );
+          this.ctx.fillStyle = "white";
           this.ctx.fillText(
             "Click anywhere to start",
             this.ctx.canvas.width / 2,
@@ -181,16 +174,16 @@ export class FlappyLarbi extends BasicGame {
             }
             //* Collision detection
             /**
-         *! Top Bird: bird.y - bird.radius
-         *! Bottom Bird: bird.y + bird.radius
-         *! Right Bird: bird.x + bird.radius
-         *! Left Bird: bird.x - bird.radius
+            *! Top Bird: bird.y - bird.radius
+            *! Bottom Bird: bird.y + bird.radius
+            *! Right Bird: bird.x + bird.radius
+            *! Left Bird: bird.x - bird.radius
 
-         *? Top Pipe: pipe.y
-         *? Bottom Pipe: pipe.y + pipe.height
-         *? Right Pipe: pipe.x + pipe.width
-         *? Left Pipe: pipe.x
-        */
+            *? Top Pipe: pipe.y
+            *? Bottom Pipe: pipe.y + pipe.height
+            *? Right Pipe: pipe.x + pipe.width
+            *? Left Pipe: pipe.x
+            */
             //* Top Pipe Collision detection
             if (
               this.bird.pos.x + this.bird.radius >
