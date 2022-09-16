@@ -27,6 +27,7 @@ const register: NextPage = () => {
     type: "error" | "success";
     text: string;
   }>();
+  const [isVisible, setIsVisible] = useState(false);
 
   const clearMessage = () =>
     setTimeout(() => {
@@ -121,7 +122,7 @@ const register: NextPage = () => {
                   <label className="font-bold text-2xl">Password</label>
                   <br />
                   <input
-                    type="password"
+                    type={isVisible ? "text" : "password"}
                     className={
                       errors.password
                         ? "border-2 border-red-600 rounded-md w-52 h-10 pl-2"
@@ -130,10 +131,16 @@ const register: NextPage = () => {
                     placeholder="********"
                     {...register("password", { required: true, minLength: 8 })}
                   />
+                  <span
+                    className="-ml-6 cursor-pointer"
+                    onClick={() => setIsVisible(!isVisible)}
+                  >
+                    {isVisible ? "😑" : "👁"}
+                  </span>
                   {errors.password && (
                     <p className="font-semibold text-red-600">
-                      Password is required and must be between at least 8
-                      characters.
+                      Password is required and must be at least 8 characters
+                      long.
                     </p>
                   )}
                 </div>

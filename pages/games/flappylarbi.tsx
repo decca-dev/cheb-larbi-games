@@ -7,38 +7,39 @@ import {
   FlappyLarbi,
   Bird,
   Pipe,
-  BirdType,
   GAP,
 } from "../../lib/engine/games/flappylarbi";
 import { useEffect, useRef } from "react";
-import type { GamePlayedInterface, UserInterface } from "../../lib/types";
+import type { Game, UserInterface } from "../../lib/types";
 import type { NextPage, NextPageContext } from "next";
 
 const flappylarbi: NextPage<{ user: UserInterface }> = ({ user }) => {
-  const userGameData = user.gamesPlayed?.find(
-    (game) => game.name === "flappy larbi"
-  );
+  const userGameData = user.gamesPlayed!["flappyLarbi"];
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  let data: GamePlayedInterface;
+  let data: Game;
   if (userGameData !== undefined) {
     data = {
-      name: "flappy larbi",
+      name: "flappyLarbi",
       highestScore: userGameData?.highestScore!,
       totalScore: userGameData?.totalScore!,
       timePlayed: userGameData?.timePlayed!,
       inventory: userGameData?.inventory!,
       equiped: userGameData?.equiped,
+      coinsToAdd: 0,
     };
   } else {
     data = {
-      name: "flappy larbi",
+      name: "flappyLarbi",
       highestScore: 0,
       totalScore: 0,
       timePlayed: 0,
       inventory: [],
       equiped: "bird-normal",
+      coinsToAdd: 0,
     };
   }
+  console.log(data);
+  const gameScores: number[] = [];
   useEffect(() => {
     const canvas = canvasRef.current!;
     const ctx = canvas.getContext("2d");
@@ -84,6 +85,9 @@ const flappylarbi: NextPage<{ user: UserInterface }> = ({ user }) => {
         } else if (game.state === "PLAYING") {
           bird.jump();
         } else {
+          gameScores.push(game.score);
+          (data.totalScore as number) += game.score;
+          (data.coinsToAdd as number) += Math.floor(Math.random() * 10) + 1;
           game.reset();
           game.draw();
         }
@@ -97,6 +101,9 @@ const flappylarbi: NextPage<{ user: UserInterface }> = ({ user }) => {
         } else if (game.state === "PLAYING") {
           bird.jump();
         } else {
+          gameScores.push(game.score);
+          (data.totalScore as number) += game.score;
+          (data.coinsToAdd as number) += Math.floor(Math.random() * 10) + 1;
           game.reset();
           game.draw();
         }
@@ -113,6 +120,35 @@ const flappylarbi: NextPage<{ user: UserInterface }> = ({ user }) => {
     };
 
     loop();
+
+    const start = new Date().getTime();
+
+    document.addEventListener("visibilitychange", () => {
+      const end = new Date().getTime();
+      const totalTime = end - start;
+      const date = new Date(totalTime);
+      gameScores.push(data.highestScore as number);
+      if (document.visibilityState === "hidden") {
+        navigator.sendBeacon(
+          "/api/auth/me?action=game",
+          JSON.stringify({
+            name: "flappyLarbi",
+            totalScore: data.totalScore,
+            highestScore: Math.max(...gameScores),
+            timePlayed: (data.timePlayed as number) + totalTime,
+            equiped: data.equiped,
+            inventory: data.inventory,
+            coinsToAdd: data.coinsToAdd,
+            time:
+              `${date.getHours()}`.padEnd(2, "00") +
+              ":" +
+              `${date.getMinutes()}`.padEnd(2, "00") +
+              ":" +
+              `${date.getSeconds()}`.padEnd(2, "00"),
+          })
+        );
+      }
+    });
   }, []);
 
   return (
@@ -124,7 +160,12 @@ const flappylarbi: NextPage<{ user: UserInterface }> = ({ user }) => {
       )}
       <Layout>
         <GameLayout>
-          <canvas ref={canvasRef} width={400} height={550}></canvas>
+          <canvas
+            ref={canvasRef}
+            width={400}
+            height={550}
+            className="select-none"
+          ></canvas>
         </GameLayout>
       </Layout>
     </>

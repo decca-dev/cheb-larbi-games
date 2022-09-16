@@ -2,6 +2,9 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import User from "../../../lib/models/User";
 import { genSalt, hash } from "bcryptjs";
 import dbConnect from "../../../lib/helpers/dbConnect";
+import { Logger } from "../../../lib/helpers/Logger";
+
+const logger = new Logger("/API/AUTH/REGISTER");
 
 interface Data {
   error: boolean;
@@ -32,6 +35,7 @@ export default async function handler(
       name: name,
       avatar: avatar,
       email: email,
+      gamesPlayed: {},
     });
     genSalt(10, (ERROR, salt) => {
       hash(password, salt, async (error, hash) => {

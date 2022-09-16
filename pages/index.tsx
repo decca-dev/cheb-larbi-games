@@ -15,7 +15,7 @@ const Home: NextPage<{ data: Array<{ date: string; message: string }> }> = ({
       <Layout>
         <div className="flex flex-col items-center text-white text-center">
           <div className="text-center py-5">
-            <h1 className="text-3xl font-bold">Cheb Larbi</h1>
+            <h1 className="text-3xl font-bold">🎮🕹 Cheb Larbi Games 🎮🕹</h1>
             <p className="text-xl font-semibold">
               A fan-made website dedicated to the one and only, Cheb Larbi
             </p>

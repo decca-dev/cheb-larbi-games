@@ -61,6 +61,8 @@ const login: NextPage<{ loggedIn: boolean }> = ({ loggedIn }) => {
     text: string;
   }>();
 
+  const [isVisible, setIsVisible] = useState(false);
+
   const clearMessage = () =>
     setTimeout(() => {
       setMessage({ type: "success", text: "" });
@@ -123,7 +125,7 @@ const login: NextPage<{ loggedIn: boolean }> = ({ loggedIn }) => {
                 <label className="font-bold text-2xl">Password</label>
                 <br />
                 <input
-                  type="password"
+                  type={isVisible ? "text" : "password"}
                   placeholder="********"
                   className={
                     errors.password
@@ -132,6 +134,12 @@ const login: NextPage<{ loggedIn: boolean }> = ({ loggedIn }) => {
                   }
                   {...register("password", { required: true })}
                 />
+                <span
+                  className="-ml-6 cursor-pointer"
+                  onClick={() => setIsVisible(!isVisible)}
+                >
+                  {isVisible ? "😑" : "👁"}
+                </span>
                 {errors.password && (
                   <p className="font-semibold text-red-600">
                     Password is required.
