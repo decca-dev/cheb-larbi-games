@@ -22,6 +22,7 @@ const Navbar: FC = () => {
                 { text: "Profile", href: "/profile" },
                 { text: "Logout", href: "/api/auth/logout" },
                 { text: "Leaderboard", href: "/leaderboard" },
+                { text: "Shops", href: "/shops" },
               ]}
               direction="bottom"
               child={
